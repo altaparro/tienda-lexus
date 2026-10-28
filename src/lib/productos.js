@@ -4,6 +4,7 @@ export async function obtenerProductosPublicos() {
   const { data, error } = await supabase
     .from('productos')
     .select('*, tipo:tipo_producto(id, nombre)')
+    .gt('stock', 0)
     .order('id')
 
   if (error) {
