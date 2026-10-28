@@ -4,7 +4,6 @@ export async function obtenerProductosPublicos() {
   const { data, error } = await supabase
     .from('productos')
     .select('*, tipo:tipo_producto(id, nombre)')
-    .eq('visible_tienda', true)
     .order('id')
 
   if (error) {
@@ -23,7 +22,6 @@ export async function obtenerProductoPublico(id) {
     .from('productos')
     .select('*, tipo:tipo_producto(id, nombre)')
     .eq('id', numero)
-    .eq('visible_tienda', true)
     .maybeSingle()
 
   if (error) {
