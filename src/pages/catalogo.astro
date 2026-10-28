@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Catalogo from '../components/Catalogo'
+import { obtenerProductosPublicos } from '../lib/productos'
+
+const productos = await obtenerProductosPublicos()
+const tipoInicial = Astro.url.searchParams.get('tipo') || ''
+const marcaInicial = Astro.url.searchParams.get('marca') || ''
+---
+
+<Layout title={`Catálogo — Lexus Autoradio`} description="Explorá el catálogo completo de productos de Lexus Autoradio.">
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold tracking-tight text-slate-900">Catálogo</h1>
+      <p class="mt-1 text-sm text-slate-500">
+        Buscá por nombre, código o marca, o filtrá por tipo.
+      </p>
+    </div>
+
+    {productos.length === 0 ? (
+      <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
+        <p class="text-lg font-semibold text-slate-600">El catálogo está vacío</p>
+        <p class="mt-1 text-sm text-slate-400">Estamos cargando productos. Volvé pronto.</p>
+      </div>
+    ) : (
+      <Catalogo
+        client:load
+        productos={productos}
+        tipoInicial={tipoInicial}
+        marcaInicial={marcaInicial}
+      />
+    )}
+  </div>
+</Layout>

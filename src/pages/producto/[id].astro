@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import BotonCarrito from '../../components/BotonCarrito'
+import TarjetaProducto from '../../components/TarjetaProducto'
+import { obtenerProductoPublico, obtenerProductosPublicos } from '../../lib/productos'
+import { fmtPrecio } from '../../lib/format'
+import { NEGOCIO, linkWhatsApp } from '../../lib/negocio'
+
+const { id } = Astro.params
+const producto = await obtenerProductoPublico(id)
+
+if (!producto) {
+  return new Response(
+    '<!doctype html><html lang="es"><body style="font-family:sans-serif;padding:4rem;text-align:center"><h1>Producto no encontrado</h1><p><a href="/catalogo">Volver al catálogo</a></p></body></html>',
+    { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+  )
+}
+
+const relacionados = (await obtenerProductosPublicos())
+  .filter((p) => p.id !== producto.id && p.tipo?.id === producto.tipo?.id)
+  .slice(0, 4)
+
+const stock = Number(producto.stock || 0)
+const consulta = linkWhatsApp(
+  `Hola ${NEGOCIO.nombre}, quiero consultar por: ${producto.marca ? `${producto.marca} ` : ''}${producto.nombre}`
+)
+---
+
+<Layout
+  title={`${producto.marca ? `${producto.marca} ` : ''}${producto.nombre} — Lexus Autoradio`}
+  description={`Comprá ${producto.nombre}${producto.marca ? ` ${producto.marca}` : ''} en Lexus Autoradio. Precio: ${fmtPrecio.format(producto.precio_venta)}.`}
+>
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <nav class="mb-6 text-sm text-slate-400">
+      <a href="/" class="hover:text-slate-600">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="/catalogo" class="hover:text-slate-600">Catálogo</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-600">{producto.nombre}</span>
+    </nav>
+
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white">
+        {
+          producto.imagen ? (
+            <img
+              src={producto.imagen}
+              alt={producto.nombre}
+              class="aspect-square w-full object-contain p-8"
+            />
+          ) : (
+            <div class="flex aspect-square w-full items-center justify-center bg-slate-50">
+              <img src="/logo.png" alt="" class="h-32 w-32 rounded-2xl object-contain opacity-40" />
+            </div>
+          )
+        }
+      </div>
+
+      <div>
+        {
+          producto.marca && (
+            <p class="text-xs font-semibold uppercase tracking-widest text-orange-600">
+              {producto.marca}
+            </p>
+          )
+        }
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">{producto.nombre}</h1>
+
+        <p class="mt-4 text-3xl font-bold tabular-nums text-slate-900">
+          {fmtPrecio.format(producto.precio_venta)}
+        </p>
+
+        <div class="mt-4 flex flex-wrap items-center gap-3 text-sm">
+          {
+            stock > 0 ? (
+              <span
+                class={`rounded-full px-3 py-1 font-medium ring-1 ${
+                  stock <= 5
+                    ? 'bg-amber-50 text-amber-700 ring-amber-100'
+                    : 'bg-emerald-50 text-emerald-700 ring-emerald-100'
+                }`}
+              >
+                {stock <= 5 ? `¡Solo ${stock} en stock!` : 'En stock'}
+              </span>
+            ) : (
+              <span class="rounded-full bg-red-50 px-3 py-1 font-medium text-red-600 ring-1 ring-red-100">
+                Sin stock
+              </span>
+            )
+          }
+          {producto.tipo?.nombre && (
+            <span class="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-600">
+              {producto.tipo.nombre}
+            </span>
+          )}
+          <span class="text-slate-400">Cód. {producto.codigo}</span>
+        </div>
+
+        <div class="mt-8 max-w-xs">
+          <BotonCarrito client:load producto={producto} />
+        </div>
+
+        <a
+          href={consulta}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-3 block max-w-xs rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+        >
+          Consultar por WhatsApp
+        </a>
+
+        <div class="mt-8 space-y-3 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600">
+          <p class="flex items-start gap-3">
+            <span class="mt-0.5 text-base">📦</span>
+            <span>Retiro en {NEGOCIO.ciudad} o envío a coordinar.</span>
+          </p>
+          <p class="flex items-start gap-3">
+            <span class="mt-0.5 text-base">💬</span>
+            <span>El pedido se confirma por WhatsApp: sin pagos online.</span>
+          </p>
+          <p class="flex items-start gap-3">
+            <span class="mt-0.5 text-base">🕐</span>
+            <span>{NEGOCIO.horarios}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {
+      relacionados.length > 0 && (
+        <section class="mt-16">
+          <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900">
+            Productos relacionados
+          </h2>
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {relacionados.map((p) => (
+              <TarjetaProducto producto={p} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Layout>
