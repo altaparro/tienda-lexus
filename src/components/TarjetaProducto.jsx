@@ -14,7 +14,7 @@ export default function TarjetaProducto({ producto }) {
       href={`/producto/${producto.id}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-700 bg-neutral-800 shadow-sm transition hover:-translate-y-1 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-900/20"
     >
-      <div className="relative aspect-square overflow-hidden bg-neutral-800">
+      <div className="relative aspect-square overflow-hidden bg-white">
         {producto.imagen ? (
           <img
             src={producto.imagen}

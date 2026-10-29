@@ -43,7 +43,7 @@ export default function CarritoPage() {
             key={item.producto_id}
             className="flex gap-4 rounded-2xl border border-neutral-700 bg-neutral-800 p-4 shadow-sm"
           >
-            <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-neutral-800">
+            <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-white">
               {item.imagen ? (
                 <img src={item.imagen} alt={item.nombre} className="h-full w-full object-contain p-2" />
               ) : (

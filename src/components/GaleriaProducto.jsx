@@ -7,7 +7,7 @@ export default function GaleriaProducto({ imagenes, nombre }) {
 
   return (
     <div>
-      <div className="aspect-square overflow-hidden rounded-3xl border border-neutral-700 bg-neutral-800">
+      <div className="aspect-square overflow-hidden rounded-3xl border border-neutral-700 bg-white">
         <img
           src={imagenes[activo]}
           alt={nombre}
