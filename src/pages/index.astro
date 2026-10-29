@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Hero from '../components/Hero'
-import ListadoProductos from '../components/ListadoProductos'
+import Catalogo from '../components/Catalogo'
 import { obtenerProductosPublicos } from '../lib/productos'
 import { NEGOCIO } from '../lib/negocio'
-
 const productos = await obtenerProductosPublicos()
 
 const heroGlob = import.meta.glob('/src/assets/hero/*.{jpg,jpeg,png,webp}', {
@@ -96,9 +95,9 @@ const servicios = [
       <section class="mx-auto max-w-6xl px-4 py-8">
         <div class="mb-6 flex items-end justify-between">
           <div>
-            <h2 class="text-xl font-bold tracking-tight text-neutral-100">Productos</h2>
+            <h2 class="text-xl font-bold tracking-tight text-neutral-100">Catálogo</h2>
             <p class="mt-1 text-sm text-neutral-400">
-              Empezamos por los estéreos. Usá el catálogo para buscar el resto.
+              Buscá por nombre, código o marca y filtrá por tipo.
             </p>
           </div>
           <a
@@ -108,8 +107,7 @@ const servicios = [
             Ver todos →
           </a>
         </div>
-        <ListadoProductos client:load productos={productosOrdenados} />
-      </section>
+        <Catalogo client:load productos={productosOrdenados} />      </section>
     )
   }
 
