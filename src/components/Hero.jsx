@@ -13,7 +13,7 @@ export default function Hero({ imagenes }) {
 
   return (
     <section className="bg-neutral-900">
-      <div className="relative mx-auto h-[320px] w-full max-w-6xl overflow-hidden sm:h-[420px]">
+      <div className="relative h-[320px] w-full overflow-hidden sm:h-[420px]">
         {imagenes.map((src, i) => (
           <img
             key={src}
