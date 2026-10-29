@@ -4,8 +4,8 @@ import { fmtPrecio } from '../lib/format'
 import { NEGOCIO, linkWhatsApp } from '../lib/negocio'
 
 const claseInput =
-  'w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-200'
-const claseLabel = 'mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500'
+  'w-full rounded-xl border border-slate-600 bg-neutral-800 px-4 py-3 text-sm text-slate-200 placeholder:text-slate-400 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30'
+const claseLabel = 'mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400'
 
 export default function Checkout() {
   const { items, total, cantidadTotal, vaciar } = useCarrito()
@@ -91,8 +91,8 @@ export default function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
-        <p className="text-lg font-semibold text-slate-700">No hay nada para comprar</p>
+      <div className="rounded-2xl border border-dashed border-slate-600 bg-neutral-800 px-6 py-16 text-center">
+        <p className="text-lg font-semibold text-slate-300">No hay nada para comprar</p>
         <a
           href="/catalogo"
           className="mt-6 inline-block rounded-xl bg-orange-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-700"
@@ -105,9 +105,9 @@ export default function Checkout() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-      <form onSubmit={enviar} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 className="text-lg font-bold text-slate-900">Tus datos</h1>
-        <p className="mt-1 text-sm text-slate-500">
+      <form onSubmit={enviar} className="rounded-2xl border border-slate-700 bg-neutral-800 p-6 shadow-sm">
+        <h1 className="text-lg font-bold text-slate-100">Tus datos</h1>
+        <p className="mt-1 text-sm text-slate-400">
           Te contactamos por WhatsApp para confirmar el pedido.
         </p>
 
@@ -186,23 +186,23 @@ export default function Checkout() {
         </button>
       </form>
 
-      <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-sm font-bold uppercase tracking-wide text-slate-700">
+      <aside className="h-fit rounded-2xl border border-slate-700 bg-neutral-800 p-5 shadow-sm">
+        <h2 className="text-sm font-bold uppercase tracking-wide text-slate-300">
           Tu pedido ({cantidadTotal})
         </h2>
         <ul className="mt-4 space-y-3">
           {items.map((i) => (
             <li key={i.producto_id} className="flex justify-between gap-3 text-sm">
-              <span className="text-slate-600">
-                <span className="font-semibold text-slate-800">{i.cantidad}×</span> {i.nombre}
+              <span className="text-slate-400">
+                <span className="font-semibold text-slate-200">{i.cantidad}×</span> {i.nombre}
               </span>
-              <span className="shrink-0 tabular-nums text-slate-800">
+              <span className="shrink-0 tabular-nums text-slate-200">
                 {fmtPrecio.format(i.precio * i.cantidad)}
               </span>
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex justify-between border-t border-slate-100 pt-4 text-sm font-bold text-slate-900">
+        <div className="mt-4 flex justify-between border-t border-slate-700 pt-4 text-sm font-bold text-slate-100">
           <span>Total</span>
           <span className="tabular-nums">{fmtPrecio.format(total)}</span>
         </div>
@@ -235,15 +235,15 @@ function Confirmacion({ pedido }) {
     .join('\n')
 
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+    <div className="mx-auto max-w-lg rounded-2xl border border-slate-700 bg-neutral-800 p-8 text-center shadow-sm">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl text-emerald-600">
         ✓
       </div>
-      <h1 className="mt-4 text-xl font-bold text-slate-900">¡Pedido recibido!</h1>
-      <p className="mt-2 text-sm text-slate-500">
-        Tu pedido <span className="font-semibold text-slate-700">#{pedido.pedido_id}</span> quedó
+      <h1 className="mt-4 text-xl font-bold text-slate-100">¡Pedido recibido!</h1>
+      <p className="mt-2 text-sm text-slate-400">
+        Tu pedido <span className="font-semibold text-slate-300">#{pedido.pedido_id}</span> quedó
         registrado. El total es de{' '}
-        <span className="font-semibold text-slate-700">{fmtPrecio.format(pedido.total)}</span>.
+        <span className="font-semibold text-slate-300">{fmtPrecio.format(pedido.total)}</span>.
       </p>
 
       <a
@@ -260,7 +260,7 @@ function Confirmacion({ pedido }) {
 
       <a
         href="/catalogo"
-        className="mt-3 block text-sm font-medium text-slate-500 transition hover:text-slate-700"
+        className="mt-3 block text-sm font-medium text-slate-400 transition hover:text-slate-300"
       >
         Seguir comprando
       </a>

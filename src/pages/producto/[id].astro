@@ -57,11 +57,11 @@ const consulta = linkWhatsApp(
     })} />
 
     <nav class="mb-6 text-sm text-slate-400">
-      <a href="/" class="hover:text-slate-600">Inicio</a>
+      <a href="/" class="hover:text-slate-400">Inicio</a>
       <span class="mx-2">/</span>
-      <a href="/catalogo" class="hover:text-slate-600">Catálogo</a>
+      <a href="/catalogo" class="hover:text-slate-400">Catálogo</a>
       <span class="mx-2">/</span>
-      <span class="text-slate-600">{producto.nombre}</span>
+      <span class="text-slate-400">{producto.nombre}</span>
     </nav>
 
     <div class="grid gap-10 lg:grid-cols-2">
@@ -70,7 +70,7 @@ const consulta = linkWhatsApp(
           galeria.length > 0 ? (
             <GaleriaProducto client:load imagenes={galeria} nombre={producto.nombre} />
           ) : (
-            <div class="flex aspect-square w-full items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-white">
+            <div class="flex aspect-square w-full items-center justify-center overflow-hidden rounded-3xl border border-slate-700 bg-neutral-800">
               <svg class="h-20 w-20 text-slate-200" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
               </svg>
@@ -87,17 +87,17 @@ const consulta = linkWhatsApp(
             </p>
           )
         }
-        <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">{producto.nombre}</h1>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-100">{producto.nombre}</h1>
 
         {
           producto.descripcion && (
-            <p class="mt-4 whitespace-pre-line text-sm leading-relaxed text-slate-600">
+            <p class="mt-4 whitespace-pre-line text-sm leading-relaxed text-slate-400">
               {producto.descripcion}
             </p>
           )
         }
 
-        <p class="mt-4 text-3xl font-bold tabular-nums text-slate-900">
+        <p class="mt-4 text-3xl font-bold tabular-nums text-slate-100">
           {fmtPrecio.format(producto.precio_venta)}
         </p>
 
@@ -120,7 +120,7 @@ const consulta = linkWhatsApp(
             )
           }
           {producto.tipo?.nombre && (
-            <span class="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-600">
+            <span class="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-400">
               {producto.tipo.nombre}
             </span>
           )}
@@ -135,12 +135,12 @@ const consulta = linkWhatsApp(
           href={consulta}
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-3 block max-w-xs rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+          class="mt-3 block max-w-xs rounded-xl border border-slate-700 bg-neutral-800 px-6 py-3.5 text-center text-sm font-semibold text-slate-300 transition hover:bg-neutral-800"
         >
           Consultar por WhatsApp
         </a>
 
-        <div class="mt-8 space-y-3 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600">
+        <div class="mt-8 space-y-3 rounded-2xl border border-slate-700 bg-neutral-800 p-5 text-sm text-slate-400">
           <p class="flex items-start gap-3">
             <span class="mt-0.5 text-base">📦</span>
             <span>Retiro gratis en {NEGOCIO.ciudad} · Envíos a coordinar por WhatsApp.</span>
@@ -160,7 +160,7 @@ const consulta = linkWhatsApp(
     {
       relacionados.length > 0 && (
         <section class="mt-16">
-          <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900">
+          <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-100">
             Productos relacionados
           </h2>
           <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">

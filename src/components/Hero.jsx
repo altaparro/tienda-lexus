@@ -13,20 +13,18 @@ export default function Hero({ imagenes }) {
 
   return (
     <section className="bg-neutral-900">
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:py-8">
-        <div className="relative mx-auto h-[260px] w-full max-w-full sm:h-[360px] md:h-[420px]">
-          {imagenes.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt=""
-              aria-hidden={i !== activa}
-              className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ${
-                i === activa ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          ))}
-        </div>
+      <div className="relative mx-auto h-[320px] w-full max-w-6xl overflow-hidden sm:h-[420px]">
+        {imagenes.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            aria-hidden={i !== activa}
+            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ${
+              i === activa ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
       </div>
     </section>
   )
