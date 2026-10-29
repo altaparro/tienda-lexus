@@ -17,7 +17,7 @@ export default function BotonCarrito({ producto, cantidad = 1 }) {
       <button
         type="button"
         disabled
-        className="w-full cursor-not-allowed rounded-xl bg-slate-200 px-6 py-3.5 text-sm font-semibold text-slate-400"
+        className="w-full cursor-not-allowed rounded-xl bg-neutral-200 px-6 py-3.5 text-sm font-semibold text-neutral-400"
       >
         Sin stock
       </button>

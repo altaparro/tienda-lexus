@@ -12,16 +12,16 @@ const busquedaInicial = Astro.url.searchParams.get('q') || ''
 <Layout title={`Catálogo — Lexus Autoradio`} description="Explorá el catálogo completo de productos de Lexus Autoradio.">
   <div class="mx-auto max-w-6xl px-4 py-10">
     <div class="mb-8">
-      <h1 class="text-2xl font-bold tracking-tight text-slate-100">Catálogo</h1>
-      <p class="mt-1 text-sm text-slate-400">
+      <h1 class="text-2xl font-bold tracking-tight text-neutral-100">Catálogo</h1>
+      <p class="mt-1 text-sm text-neutral-400">
         Buscá por nombre, código o marca, o filtrá por tipo.
       </p>
     </div>
 
     {productos.length === 0 ? (
-      <div class="rounded-2xl border border-dashed border-slate-600 bg-neutral-800 px-6 py-16 text-center">
-        <p class="text-lg font-semibold text-slate-400">El catálogo está vacío</p>
-        <p class="mt-1 text-sm text-slate-400">Estamos cargando productos. Volvé pronto.</p>
+      <div class="rounded-2xl border border-dashed border-neutral-600 bg-neutral-800 px-6 py-16 text-center">
+        <p class="text-lg font-semibold text-neutral-400">El catálogo está vacío</p>
+        <p class="mt-1 text-sm text-neutral-400">Estamos cargando productos. Volvé pronto.</p>
       </div>
     ) : (
       <Catalogo

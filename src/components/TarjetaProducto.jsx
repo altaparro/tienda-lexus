@@ -1,8 +1,7 @@
 import { fmtPrecio } from '../lib/format'
 
 function estadoStock(stock) {
-  if (stock <= 0) return { texto: 'Sin stock', clase: 'bg-red-50 text-red-600 ring-red-100' }
-  if (stock <= 5) return { texto: 'Últimas unidades', clase: 'bg-amber-50 text-amber-600 ring-amber-100' }
+  if (stock <= 0) return { texto: 'Sin stock', clase: 'bg-red-500/10 text-red-400 ring-red-500/20' }
   return null
 }
 
@@ -13,7 +12,7 @@ export default function TarjetaProducto({ producto }) {
   return (
     <a
       href={`/producto/${producto.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700 bg-neutral-800 shadow-sm transition hover:-translate-y-1 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-900/20"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-700 bg-neutral-800 shadow-sm transition hover:-translate-y-1 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-900/20"
     >
       <div className="relative aspect-square overflow-hidden bg-neutral-800">
         {producto.imagen ? (
@@ -26,7 +25,7 @@ export default function TarjetaProducto({ producto }) {
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-neutral-700">
             <svg
-              className="h-10 w-10 text-slate-300"
+              className="h-10 w-10 text-neutral-300"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
@@ -55,15 +54,15 @@ export default function TarjetaProducto({ producto }) {
             {producto.marca}
           </span>
         )}
-        <h3 className="mt-1 line-clamp-2 flex-1 text-sm font-semibold text-slate-200 group-hover:text-slate-50">
+        <h3 className="mt-1 line-clamp-2 flex-1 text-sm font-semibold text-neutral-200 group-hover:text-neutral-50">
           {producto.nombre}
         </h3>
         {producto.descripcion && (
-          <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-400">
+          <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-400">
             {producto.descripcion}
           </p>
         )}
-        <p className="mt-3 text-lg font-bold tabular-nums text-slate-100">
+        <p className="mt-3 text-lg font-bold tabular-nums text-neutral-100">
           {fmtPrecio.format(producto.precio_venta)}
         </p>
       </div>

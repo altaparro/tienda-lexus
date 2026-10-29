@@ -14,7 +14,7 @@ export default function CarritoBadge() {
   return (
     <a
       href="/carrito"
-      className="relative rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition hover:bg-neutral-700 hover:text-slate-100"
+      className="relative rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-700 hover:text-neutral-100"
     >
       Carrito
       {cantidad > 0 && (

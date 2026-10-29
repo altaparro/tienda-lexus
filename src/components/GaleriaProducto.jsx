@@ -7,7 +7,7 @@ export default function GaleriaProducto({ imagenes, nombre }) {
 
   return (
     <div>
-      <div className="aspect-square overflow-hidden rounded-3xl border border-slate-700 bg-neutral-800">
+      <div className="aspect-square overflow-hidden rounded-3xl border border-neutral-700 bg-neutral-800">
         <img
           src={imagenes[activo]}
           alt={nombre}
@@ -25,7 +25,7 @@ export default function GaleriaProducto({ imagenes, nombre }) {
               className={`h-16 w-16 overflow-hidden rounded-xl border-2 transition ${
                 i === activo
                   ? 'border-orange-500'
-                  : 'border-transparent hover:border-slate-600'
+                  : 'border-transparent hover:border-neutral-600'
               }`}
             >
               <img src={src} alt="" className="h-full w-full object-cover" />

@@ -4,8 +4,8 @@ import { fmtPrecio } from '../lib/format'
 import { NEGOCIO, linkWhatsApp } from '../lib/negocio'
 
 const claseInput =
-  'w-full rounded-xl border border-slate-600 bg-neutral-800 px-4 py-3 text-sm text-slate-200 placeholder:text-slate-400 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30'
-const claseLabel = 'mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400'
+  'w-full rounded-xl border border-neutral-600 bg-neutral-800 px-4 py-3 text-sm text-neutral-200 placeholder:text-neutral-400 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30'
+const claseLabel = 'mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-400'
 
 export default function Checkout() {
   const { items, total, cantidadTotal, vaciar } = useCarrito()
@@ -83,16 +83,16 @@ export default function Checkout() {
   if (!montado) {
     return (
       <div className="grid gap-6 lg:grid-cols-[1fr_320px]" aria-hidden="true">
-        <div className="h-96 animate-pulse rounded-2xl bg-slate-200" />
-        <div className="h-64 animate-pulse rounded-2xl bg-slate-200" />
+        <div className="h-96 animate-pulse rounded-2xl bg-neutral-200" />
+        <div className="h-64 animate-pulse rounded-2xl bg-neutral-200" />
       </div>
     )
   }
 
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-600 bg-neutral-800 px-6 py-16 text-center">
-        <p className="text-lg font-semibold text-slate-300">No hay nada para comprar</p>
+      <div className="rounded-2xl border border-dashed border-neutral-600 bg-neutral-800 px-6 py-16 text-center">
+        <p className="text-lg font-semibold text-neutral-300">No hay nada para comprar</p>
         <a
           href="/catalogo"
           className="mt-6 inline-block rounded-xl bg-orange-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-700"
@@ -105,9 +105,9 @@ export default function Checkout() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-      <form onSubmit={enviar} className="rounded-2xl border border-slate-700 bg-neutral-800 p-6 shadow-sm">
-        <h1 className="text-lg font-bold text-slate-100">Tus datos</h1>
-        <p className="mt-1 text-sm text-slate-400">
+      <form onSubmit={enviar} className="rounded-2xl border border-neutral-700 bg-neutral-800 p-6 shadow-sm">
+        <h1 className="text-lg font-bold text-neutral-100">Tus datos</h1>
+        <p className="mt-1 text-sm text-neutral-400">
           Te contactamos por WhatsApp para confirmar el pedido.
         </p>
 
@@ -186,27 +186,27 @@ export default function Checkout() {
         </button>
       </form>
 
-      <aside className="h-fit rounded-2xl border border-slate-700 bg-neutral-800 p-5 shadow-sm">
-        <h2 className="text-sm font-bold uppercase tracking-wide text-slate-300">
+      <aside className="h-fit rounded-2xl border border-neutral-700 bg-neutral-800 p-5 shadow-sm">
+        <h2 className="text-sm font-bold uppercase tracking-wide text-neutral-300">
           Tu pedido ({cantidadTotal})
         </h2>
         <ul className="mt-4 space-y-3">
           {items.map((i) => (
             <li key={i.producto_id} className="flex justify-between gap-3 text-sm">
-              <span className="text-slate-400">
-                <span className="font-semibold text-slate-200">{i.cantidad}×</span> {i.nombre}
+              <span className="text-neutral-400">
+                <span className="font-semibold text-neutral-200">{i.cantidad}×</span> {i.nombre}
               </span>
-              <span className="shrink-0 tabular-nums text-slate-200">
+              <span className="shrink-0 tabular-nums text-neutral-200">
                 {fmtPrecio.format(i.precio * i.cantidad)}
               </span>
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex justify-between border-t border-slate-700 pt-4 text-sm font-bold text-slate-100">
+        <div className="mt-4 flex justify-between border-t border-neutral-700 pt-4 text-sm font-bold text-neutral-100">
           <span>Total</span>
           <span className="tabular-nums">{fmtPrecio.format(total)}</span>
         </div>
-        <p className="mt-4 text-xs leading-relaxed text-slate-400">
+        <p className="mt-4 text-xs leading-relaxed text-neutral-400">
           El stock se descuenta cuando confirmamos el pedido por WhatsApp. Sin pago online:
           coordinamos el pago y la entrega con vos.
         </p>
@@ -235,15 +235,15 @@ function Confirmacion({ pedido }) {
     .join('\n')
 
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border border-slate-700 bg-neutral-800 p-8 text-center shadow-sm">
+    <div className="mx-auto max-w-lg rounded-2xl border border-neutral-700 bg-neutral-800 p-8 text-center shadow-sm">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl text-emerald-600">
         ✓
       </div>
-      <h1 className="mt-4 text-xl font-bold text-slate-100">¡Pedido recibido!</h1>
-      <p className="mt-2 text-sm text-slate-400">
-        Tu pedido <span className="font-semibold text-slate-300">#{pedido.pedido_id}</span> quedó
+      <h1 className="mt-4 text-xl font-bold text-neutral-100">¡Pedido recibido!</h1>
+      <p className="mt-2 text-sm text-neutral-400">
+        Tu pedido <span className="font-semibold text-neutral-300">#{pedido.pedido_id}</span> quedó
         registrado. El total es de{' '}
-        <span className="font-semibold text-slate-300">{fmtPrecio.format(pedido.total)}</span>.
+        <span className="font-semibold text-neutral-300">{fmtPrecio.format(pedido.total)}</span>.
       </p>
 
       <a
@@ -260,7 +260,7 @@ function Confirmacion({ pedido }) {
 
       <a
         href="/catalogo"
-        className="mt-3 block text-sm font-medium text-slate-400 transition hover:text-slate-300"
+        className="mt-3 block text-sm font-medium text-neutral-400 transition hover:text-neutral-300"
       >
         Seguir comprando
       </a>

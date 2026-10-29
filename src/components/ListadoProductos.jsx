@@ -25,18 +25,18 @@ export default function ListadoProductos({ productos }) {
             type="button"
             disabled={pagina === 0}
             onClick={() => setPagina((p) => p - 1)}
-            className="rounded-lg border border-slate-600 px-4 py-2 text-sm font-medium text-slate-400 transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg border border-neutral-600 px-4 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
             ← Anteriores
           </button>
-          <span className="px-3 text-sm tabular-nums text-slate-400">
+          <span className="px-3 text-sm tabular-nums text-neutral-400">
             Página {pagina + 1} de {paginas}
           </span>
           <button
             type="button"
             disabled={pagina >= paginas - 1}
             onClick={() => setPagina((p) => p + 1)}
-            className="rounded-lg border border-slate-600 px-4 py-2 text-sm font-medium text-slate-400 transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg border border-neutral-600 px-4 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Siguientes →
           </button>
