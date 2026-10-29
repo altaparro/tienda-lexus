@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro'
 import Hero from '../components/Hero'
 import ListadoProductos from '../components/ListadoProductos'
 import { obtenerProductosPublicos } from '../lib/productos'
-import { NEGOCIO, linkWhatsApp } from '../lib/negocio'
+import { NEGOCIO } from '../lib/negocio'
 
 const productos = await obtenerProductosPublicos()
 
@@ -36,8 +36,6 @@ const categorias = Object.entries(
   }, {})
 ).sort((a, b) => b[1] - a[1])
 
-const waConsulta = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consulta.`)
-
 const textoHero =
   'Somos una empresa familiar desde 2006. Nos dedicamos a la venta e instalación de estéreos multimedias, parlantes, alarmas, cierres centralizados, iluminación, Cree LEDs y electricidad en general.'
 
@@ -52,13 +50,7 @@ const servicios = [
 ---
 
 <Layout>
-  <Hero
-    client:load
-    nombre={NEGOCIO.nombre}
-    texto={textoHero}
-    imagenes={imagenesHero}
-    waConsulta={waConsulta}
-  />
+  <Hero client:load imagenes={imagenesHero} />
 
   <div class="mx-auto max-w-6xl px-4 py-6">
     <ul class="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -119,11 +111,15 @@ const servicios = [
     )
   }
 
-  <!-- Servicios -->
+  <!-- Quiénes somos y servicios -->
   <section class="border-t border-slate-200 bg-white">
     <div class="mx-auto max-w-6xl px-4 py-12">
-      <h2 class="text-xl font-bold tracking-tight text-slate-900">Nuestros servicios</h2>
-      <p class="mt-1 text-sm text-slate-500">Venta e instalación</p>
+      <h1 class="text-xl font-bold tracking-tight text-slate-900">Quiénes somos y servicios</h1>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600">{textoHero}</p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-500">
+        Comprá online desde donde estés y coordiná todo por WhatsApp, o acercate al local y te
+        atendemos personalmente. {NEGOCIO.direccion} · {NEGOCIO.horarios}
+      </p>
       <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {
           servicios.map(([icono, nombre]) => (
