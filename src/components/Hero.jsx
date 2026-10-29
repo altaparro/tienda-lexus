@@ -20,7 +20,7 @@ export default function Hero({ imagenes }) {
             src={src}
             alt=""
             aria-hidden={i !== activa}
-            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ${
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
               i === activa ? 'opacity-100' : 'opacity-0'
             }`}
           />
