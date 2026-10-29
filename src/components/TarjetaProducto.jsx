@@ -46,6 +46,11 @@ export default function TarjetaProducto({ producto }) {
         <h3 className="mt-1 line-clamp-2 flex-1 text-sm font-semibold text-slate-800 group-hover:text-slate-950">
           {producto.nombre}
         </h3>
+        {producto.descripcion && (
+          <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+            {producto.descripcion}
+          </p>
+        )}
         <p className="mt-3 text-lg font-bold tabular-nums text-slate-900">
           {fmtPrecio.format(producto.precio_venta)}
         </p>

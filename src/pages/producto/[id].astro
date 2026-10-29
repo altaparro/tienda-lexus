@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import BotonCarrito from '../../components/BotonCarrito'
+import GaleriaProducto from '../../components/GaleriaProducto'
 import TarjetaProducto from '../../components/TarjetaProducto'
 import { obtenerProductoPublico, obtenerProductosPublicos } from '../../lib/productos'
 import { fmtPrecio } from '../../lib/format'
@@ -16,6 +17,12 @@ if (!producto) {
   )
 }
 
+const galeria = producto.imagenes?.length
+  ? producto.imagenes
+  : producto.imagen
+    ? [producto.imagen]
+    : []
+
 const relacionados = (await obtenerProductosPublicos())
   .filter((p) => p.id !== producto.id && p.tipo?.id === producto.tipo?.id)
   .slice(0, 4)
@@ -28,7 +35,7 @@ const consulta = linkWhatsApp(
 
 <Layout
   title={`${producto.marca ? `${producto.marca} ` : ''}${producto.nombre} — Lexus Autoradio`}
-  description={`Comprá ${producto.nombre}${producto.marca ? ` ${producto.marca}` : ''} en Lexus Autoradio. Precio: ${fmtPrecio.format(producto.precio_venta)}.`}
+  description={producto.descripcion || `Comprá ${producto.nombre}${producto.marca ? ` ${producto.marca}` : ''} en Lexus Autoradio. Precio: ${fmtPrecio.format(producto.precio_venta)}.`}
 >
   <div class="mx-auto max-w-6xl px-4 py-10">
     <nav class="mb-6 text-sm text-slate-400">
@@ -40,16 +47,12 @@ const consulta = linkWhatsApp(
     </nav>
 
     <div class="grid gap-10 lg:grid-cols-2">
-      <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white">
+      <div>
         {
-          producto.imagen ? (
-            <img
-              src={producto.imagen}
-              alt={producto.nombre}
-              class="aspect-square w-full object-contain p-8"
-            />
+          galeria.length > 0 ? (
+            <GaleriaProducto client:load imagenes={galeria} nombre={producto.nombre} />
           ) : (
-            <div class="flex aspect-square w-full items-center justify-center bg-slate-50">
+            <div class="flex aspect-square w-full items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-white">
               <img src="/logo.png" alt="" class="h-32 w-32 rounded-2xl object-contain opacity-40" />
             </div>
           )
@@ -65,6 +68,14 @@ const consulta = linkWhatsApp(
           )
         }
         <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">{producto.nombre}</h1>
+
+        {
+          producto.descripcion && (
+            <p class="mt-4 whitespace-pre-line text-sm leading-relaxed text-slate-600">
+              {producto.descripcion}
+            </p>
+          )
+        }
 
         <p class="mt-4 text-3xl font-bold tabular-nums text-slate-900">
           {fmtPrecio.format(producto.precio_venta)}
