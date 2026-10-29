@@ -207,8 +207,8 @@ export default function Checkout() {
           <span className="tabular-nums">{fmtPrecio.format(total)}</span>
         </div>
         <p className="mt-4 text-xs leading-relaxed text-slate-400">
-          El stock se reserva al confirmar con {NEGOCIO.nombre}. Sin pago online: coordinamos todo
-          por WhatsApp.
+          El stock se descuenta cuando confirmamos el pedido por WhatsApp. Sin pago online:
+          coordinamos el pago y la entrega con vos.
         </p>
       </aside>
     </div>

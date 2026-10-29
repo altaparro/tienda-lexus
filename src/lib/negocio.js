@@ -1,5 +1,6 @@
 export const NEGOCIO = {
   nombre: 'Lexus Autoradio',
+  sitio: '',
   whatsapp: '542212028667',
   telefono: '221-202-8667',
   direccion: 'Calle 10 1745, B1904 La Plata, Provincia de Buenos Aires, Argentina',

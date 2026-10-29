@@ -8,6 +8,9 @@ const {
   title = `${NEGOCIO.nombre} — Tienda online`,
   description = `${NEGOCIO.nombre}: productos de audio automotor en ${NEGOCIO.ciudad}. Envíos y retiro en local.`
 } = Astro.props
+
+const sitio = NEGOCIO.sitio
+const canonical = sitio ? `${sitio}${Astro.url.pathname}` : null
 ---
 
 <!doctype html>
@@ -19,9 +22,15 @@ const {
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		{canonical && <link rel="canonical" href={canonical} />}
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={NEGOCIO.nombre} />
+		{canonical && <meta property="og:url" content={canonical} />}
+		{sitio && <meta property="og:image" content={`${sitio}/logo.png`} />}
+		{sitio && <meta property="og:image:alt" content={NEGOCIO.nombre} />}
+		<meta name="twitter:card" content="summary" />
 		<title>{title}</title>
 	</head>
 	<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">

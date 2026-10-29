@@ -6,6 +6,7 @@ import { obtenerProductosPublicos } from '../lib/productos'
 const productos = await obtenerProductosPublicos()
 const tipoInicial = Astro.url.searchParams.get('tipo') || ''
 const marcaInicial = Astro.url.searchParams.get('marca') || ''
+const busquedaInicial = Astro.url.searchParams.get('q') || ''
 ---
 
 <Layout title={`Catálogo — Lexus Autoradio`} description="Explorá el catálogo completo de productos de Lexus Autoradio.">
@@ -28,6 +29,7 @@ const marcaInicial = Astro.url.searchParams.get('marca') || ''
         productos={productos}
         tipoInicial={tipoInicial}
         marcaInicial={marcaInicial}
+        busquedaInicial={busquedaInicial}
       />
     )}
   </div>

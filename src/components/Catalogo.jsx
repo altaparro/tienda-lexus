@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 import TarjetaProducto from './TarjetaProducto'
 import { coincideBusqueda } from '../lib/busqueda'
 
-export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '' }) {
-  const [busqueda, setBusqueda] = useState('')
+export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '', busquedaInicial = '' }) {
+  const [busqueda, setBusqueda] = useState(busquedaInicial)
   const [tipo, setTipo] = useState(tipoInicial)
   const [marca, setMarca] = useState(marcaInicial)
 
@@ -32,6 +32,7 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
         p.nombre?.toLowerCase() ?? '',
         p.codigo?.toLowerCase() ?? '',
         p.marca?.toLowerCase() ?? '',
+        p.descripcion?.toLowerCase() ?? '',
         p.tipo?.nombre?.toLowerCase() ?? ''
       ])
     })
