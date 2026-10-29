@@ -87,17 +87,17 @@ const servicios = [
     productos.length > 0 && (
       <section class="mx-auto max-w-6xl px-4 py-8">
         <div class="mb-6">
-          <h2 class="text-xl font-bold tracking-tight text-neutral-100">Catálogo</h2>
-          <p class="mt-1 text-sm text-neutral-400">
-            Buscá por nombre, código o marca y filtrá por tipo.
-          </p>
+            <h2 class="text-xl font-bold tracking-tight text-neutral-100">Productos</h2>
+            <p class="mt-1 text-sm text-neutral-400">
+              Buscá por nombre, código o marca y filtrá por tipo.
+            </p>
         </div>
         <Catalogo client:load productos={productosOrdenados} />      </section>
     )
   }
 
   <!-- Quiénes somos y servicios -->
-  <section class="border-t border-neutral-700 bg-neutral-800">
+  <section id="quienes-somos" class="border-t border-neutral-700 bg-neutral-800">
     <div class="mx-auto max-w-6xl px-4 py-12">
       <h1 class="text-xl font-bold tracking-tight text-neutral-100">Quiénes somos y servicios</h1>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-400">{textoHero}</p>

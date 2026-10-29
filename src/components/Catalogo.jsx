@@ -8,6 +8,7 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
   const [busqueda, setBusqueda] = useState(busquedaInicial)
   const [tipo, setTipo] = useState(tipoInicial)
   const [marca, setMarca] = useState(marcaInicial)
+  const [orden, setOrden] = useState('')
   const [pagina, setPagina] = useState(0)
 
   const tipos = useMemo(() => {
@@ -27,7 +28,7 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
   }, [productos])
 
   const filtrados = useMemo(() => {
-    return productos.filter((p) => {
+    let res = productos.filter((p) => {
       if (tipo && p.tipo?.nombre !== tipo) return false
       if (marca && p.marca?.trim() !== marca) return false
       if (!busqueda.trim()) return true
@@ -39,13 +40,16 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
         p.tipo?.nombre?.toLowerCase() ?? ''
       ])
     })
-  }, [productos, busqueda, tipo, marca])
+    if (orden === 'asc') res = [...res].sort((a, b) => Number(a.precio_venta) - Number(b.precio_venta))
+    if (orden === 'desc') res = [...res].sort((a, b) => Number(b.precio_venta) - Number(a.precio_venta))
+    return res
+  }, [productos, busqueda, tipo, marca, orden])
 
   const hayFiltro = busqueda || tipo || marca
 
   useEffect(() => {
     setPagina(0)
-  }, [busqueda, tipo, marca])
+  }, [busqueda, tipo, marca, orden])
 
   const paginas = Math.ceil(filtrados.length / POR_PAGINA)
   const visibles = filtrados.slice(pagina * POR_PAGINA, (pagina + 1) * POR_PAGINA)
@@ -88,6 +92,16 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
             ))}
           </select>
 
+          <select
+            value={orden}
+            onChange={(e) => setOrden(e.target.value)}
+            className="rounded-xl border border-neutral-600 bg-neutral-800 px-3 py-3 text-sm text-neutral-200 shadow-sm outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30"
+          >
+            <option value="">Ordenar por</option>
+            <option value="asc">Menor precio</option>
+            <option value="desc">Mayor precio</option>
+          </select>
+
           {hayFiltro && (
             <button
               type="button"
@@ -95,6 +109,7 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
                 setBusqueda('')
                 setTipo('')
                 setMarca('')
+                setOrden('')
               }}
               className="rounded-xl border border-neutral-700 px-4 py-3 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800"
             >

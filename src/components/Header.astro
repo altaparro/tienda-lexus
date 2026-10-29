@@ -3,30 +3,37 @@ import CarritoBadge from './CarritoBadge.jsx'
 import { NEGOCIO } from '../lib/negocio'
 ---
 
-<header class="sticky top-0 z-40 border-b border-neutral-700 bg-neutral-900/90 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-    <a href="/" class="flex items-center gap-2" aria-label={`Ir al inicio de ${NEGOCIO.nombre}`}>
+<header class="sticky top-0 z-40 border-b border-neutral-800 bg-neutral-950/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
+    <a href="/" class="flex shrink-0 items-center gap-2" aria-label={`Ir al inicio de ${NEGOCIO.nombre}`}>
       <img src="/logo.png" alt={NEGOCIO.nombre} class="h-10 w-10 rounded-lg object-contain" />
-      <span class="text-sm font-bold tracking-tight text-neutral-100 sm:text-base">
+      <span class="hidden text-sm font-bold tracking-tight text-neutral-100 sm:inline sm:text-base">
         {NEGOCIO.nombre}
       </span>
     </a>
 
-    <nav class="flex items-center gap-2 sm:gap-4">
-      <form action="/catalogo" method="get" class="hidden sm:block">
-        <input
-          type="search"
-          name="q"
-          placeholder="Buscar..."
-          aria-label="Buscar productos"
-          class="w-40 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-sm text-neutral-200 placeholder:text-neutral-400 outline-none transition focus:border-orange-400 focus:bg-neutral-800 focus:ring-2 focus:ring-orange-500/30 lg:w-56"
-        />
-      </form>
+    <form action="/catalogo" method="get" class="hidden flex-1 justify-center sm:flex">
+      <input
+        type="search"
+        name="q"
+        placeholder="Buscar..."
+        aria-label="Buscar productos"
+        class="w-full max-w-md rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-sm text-neutral-200 placeholder:text-neutral-500 outline-none transition focus:border-orange-400 focus:bg-neutral-800 focus:ring-2 focus:ring-orange-500/30"
+      />
+    </form>
+
+    <nav class="flex shrink-0 items-center gap-2 sm:gap-4">
       <a
         href="/catalogo"
-        class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-700 hover:text-neutral-100"
+        class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800 hover:text-neutral-100"
       >
-        Catálogo
+        Productos
+      </a>
+      <a
+        href="/#quienes-somos"
+        class="hidden rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800 hover:text-neutral-100 sm:inline-block"
+      >
+        Quiénes somos
       </a>
       <CarritoBadge client:load />
     </nav>
