@@ -27,13 +27,6 @@ const productosOrdenados = [...productos].sort(
   (a, b) => Number(esEstereo(b)) - Number(esEstereo(a))
 )
 
-const categorias = Object.entries(
-  productos.reduce((acc, p) => {
-    const nombre = p.tipo?.nombre || 'Otros'
-    acc[nombre] = (acc[nombre] || 0) + 1
-    return acc
-  }, {})
-).sort((a, b) => b[1] - a[1])
 
 const textoHero =
   'Somos una empresa familiar desde 2006. Nos dedicamos a la venta e instalación de estéreos multimedias, parlantes, alarmas, cierres centralizados, iluminación, Cree LEDs y electricidad en general.'
@@ -93,43 +86,13 @@ const servicios = [
   {
     productos.length > 0 && (
       <section class="mx-auto max-w-6xl px-4 py-8">
-        <div class="mb-6 flex items-end justify-between">
-          <div>
-            <h2 class="text-xl font-bold tracking-tight text-neutral-100">Catálogo</h2>
-            <p class="mt-1 text-sm text-neutral-400">
-              Buscá por nombre, código o marca y filtrá por tipo.
-            </p>
-          </div>
-          <a
-            href="/catalogo"
-            class="text-sm font-medium text-orange-600 transition hover:text-orange-700"
-          >
-            Ver todos →
-          </a>
+        <div class="mb-6">
+          <h2 class="text-xl font-bold tracking-tight text-neutral-100">Catálogo</h2>
+          <p class="mt-1 text-sm text-neutral-400">
+            Buscá por nombre, código o marca y filtrá por tipo.
+          </p>
         </div>
         <Catalogo client:load productos={productosOrdenados} />      </section>
-    )
-  }
-
-  <!-- Categorías -->
-  {
-    categorias.length > 0 && (
-      <section class="mx-auto max-w-6xl px-4 py-8">
-        <h2 class="mb-6 text-xl font-bold tracking-tight text-neutral-100">Categorías</h2>
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {categorias.map(([nombre, cantidad]) => (
-            <a
-              href={`/catalogo?tipo=${encodeURIComponent(nombre)}`}
-              class="rounded-2xl border border-neutral-700 bg-neutral-800 p-4 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-orange-500/60 hover:shadow-md"
-            >
-              <p class="text-sm font-semibold text-neutral-200">{nombre}</p>
-              <p class="mt-1 text-xs text-neutral-400">
-                {cantidad} {cantidad === 1 ? 'producto' : 'productos'}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
     )
   }
 

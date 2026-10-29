@@ -1,11 +1,14 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import TarjetaProducto from './TarjetaProducto'
 import { coincideBusqueda } from '../lib/busqueda'
+
+const POR_PAGINA = 12
 
 export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '', busquedaInicial = '' }) {
   const [busqueda, setBusqueda] = useState(busquedaInicial)
   const [tipo, setTipo] = useState(tipoInicial)
   const [marca, setMarca] = useState(marcaInicial)
+  const [pagina, setPagina] = useState(0)
 
   const tipos = useMemo(() => {
     const set = new Set()
@@ -39,6 +42,13 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
   }, [productos, busqueda, tipo, marca])
 
   const hayFiltro = busqueda || tipo || marca
+
+  useEffect(() => {
+    setPagina(0)
+  }, [busqueda, tipo, marca])
+
+  const paginas = Math.ceil(filtrados.length / POR_PAGINA)
+  const visibles = filtrados.slice(pagina * POR_PAGINA, (pagina + 1) * POR_PAGINA)
 
   return (
     <div>
@@ -104,11 +114,37 @@ export default function Catalogo({ productos, tipoInicial = '', marcaInicial = '
           <p className="mt-1 text-sm text-neutral-400">Probá con otros filtros o términos.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {filtrados.map((p) => (
-            <TarjetaProducto key={p.id} producto={p} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {visibles.map((p) => (
+              <TarjetaProducto key={p.id} producto={p} />
+            ))}
+          </div>
+
+          {paginas > 1 && (
+            <div className="mt-8 flex items-center justify-center gap-2">
+              <button
+                type="button"
+                disabled={pagina === 0}
+                onClick={() => setPagina((p) => p - 1)}
+                className="rounded-lg border border-neutral-600 px-4 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                ← Anteriores
+              </button>
+              <span className="px-3 text-sm tabular-nums text-neutral-400">
+                Página {pagina + 1} de {paginas}
+              </span>
+              <button
+                type="button"
+                disabled={pagina >= paginas - 1}
+                onClick={() => setPagina((p) => p + 1)}
+                className="rounded-lg border border-neutral-600 px-4 py-2 text-sm font-medium text-neutral-400 transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Siguientes →
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   )
