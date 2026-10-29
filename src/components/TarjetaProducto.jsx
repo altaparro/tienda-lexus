@@ -13,7 +13,7 @@ export default function TarjetaProducto({ producto }) {
   return (
     <a
       href={`/producto/${producto.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700 bg-neutral-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700 bg-neutral-800 shadow-sm transition hover:-translate-y-1 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-900/20"
     >
       <div className="relative aspect-square overflow-hidden bg-neutral-800">
         {producto.imagen ? (
@@ -24,7 +24,7 @@ export default function TarjetaProducto({ producto }) {
             className="h-full w-full object-contain p-4 transition group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-slate-100">
+          <div className="flex h-full w-full items-center justify-center bg-neutral-700">
             <svg
               className="h-10 w-10 text-slate-300"
               fill="none"
