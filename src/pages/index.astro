@@ -1,12 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import TarjetaProducto from '../components/TarjetaProducto'
+import Hero from '../components/Hero'
+import ListadoProductos from '../components/ListadoProductos'
 import { obtenerProductosPublicos } from '../lib/productos'
 import { NEGOCIO, linkWhatsApp } from '../lib/negocio'
 
 const productos = await obtenerProductosPublicos()
 
-const novedades = [...productos].slice(-8).reverse()
+const heroGlob = import.meta.glob('/src/assets/hero/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+})
+const imagenesHero = Object.keys(heroGlob)
+  .sort()
+  .map((k) => heroGlob[k])
+
+const normalizar = (t) =>
+  (t || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+
+const esEstereo = (p) => normalizar(p.tipo?.nombre).includes('estereo')
+
+const productosOrdenados = [...productos].sort(
+  (a, b) => Number(esEstereo(b)) - Number(esEstereo(a))
+)
 
 const categorias = Object.entries(
   productos.reduce((acc, p) => {
@@ -17,61 +37,53 @@ const categorias = Object.entries(
 ).sort((a, b) => b[1] - a[1])
 
 const waConsulta = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consulta.`)
+
+const textoHero =
+  'Somos una empresa familiar desde 2006. Nos dedicamos a la venta e instalación de estéreos multimedias, parlantes, alarmas, cierres centralizados, iluminación, Cree LEDs y electricidad en general.'
+
+const servicios = [
+  ['🔊', 'Estéreos multimedias'],
+  ['🎤', 'Parlantes'],
+  ['🚨', 'Alarmas'],
+  ['🔑', 'Cierres centralizados'],
+  ['💡', 'Iluminación y Cree LEDs'],
+  ['⚡', 'Electricidad en general']
+]
 ---
 
 <Layout>
-  <!-- Hero -->
-  <section class="border-b border-slate-200 bg-gradient-to-b from-orange-50 to-white">
-    <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:py-20">
-      <p class="text-xs font-semibold uppercase tracking-widest text-orange-600">
-        Audio automotor · La Plata
-      </p>
-      <h1 class="mx-auto mt-3 max-w-2xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-        {NEGOCIO.nombre}
-      </h1>
-      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-500">
-        Elegí tus productos, armá tu pedido online y lo confirmamos con vos por WhatsApp.
-        Retiro en {NEGOCIO.ciudad} o envío a coordinar.
-      </p>
-      <div class="mt-7 flex flex-wrap justify-center gap-3">
-        <a
-          href="/catalogo"
-          class="rounded-xl bg-orange-600 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-700"
-        >
-          Ver catálogo
-        </a>
-        <a
-          href={waConsulta}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-        >
-          Consultar por WhatsApp
-        </a>
-      </div>
+  <Hero
+    client:load
+    nombre={NEGOCIO.nombre}
+    texto={textoHero}
+    imagenes={imagenesHero}
+    waConsulta={waConsulta}
+  />
 
-      <ul class="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
-        <li class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
-          🚚 Envíos a coordinar
-        </li>
-        <li class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
-          🏪 Retiro en {NEGOCIO.ciudad}
-        </li>
-        <li class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
-          💬 Confirmación por WhatsApp
-        </li>
-      </ul>
-    </div>
-  </section>
+  <div class="mx-auto max-w-6xl px-4 py-6">
+    <ul class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <li class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
+        🚚 Envíos a coordinar
+      </li>
+      <li class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
+        🏪 Retiro en {NEGOCIO.ciudad}
+      </li>
+      <li class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
+        💬 Confirmación por WhatsApp
+      </li>
+    </ul>
+  </div>
 
-  <!-- Novedades -->
+  <!-- Productos -->
   {
-    novedades.length > 0 && (
-      <section class="mx-auto max-w-6xl px-4 py-12">
+    productos.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 py-8">
         <div class="mb-6 flex items-end justify-between">
           <div>
-            <h2 class="text-xl font-bold tracking-tight text-slate-900">Novedades</h2>
-            <p class="mt-1 text-sm text-slate-500">Lo último que cargamos al catálogo</p>
+            <h2 class="text-xl font-bold tracking-tight text-slate-900">Productos</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Empezamos por los estéreos. Usá el catálogo para buscar el resto.
+            </p>
           </div>
           <a
             href="/catalogo"
@@ -80,11 +92,7 @@ const waConsulta = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consul
             Ver todos →
           </a>
         </div>
-        <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {novedades.map((p) => (
-            <TarjetaProducto producto={p} />
-          ))}
-        </div>
+        <ListadoProductos client:load productos={productosOrdenados} />
       </section>
     )
   }
@@ -92,7 +100,7 @@ const waConsulta = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consul
   <!-- Categorías -->
   {
     categorias.length > 0 && (
-      <section class="mx-auto max-w-6xl px-4 pb-12">
+      <section class="mx-auto max-w-6xl px-4 py-8">
         <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900">Categorías</h2>
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {categorias.map(([nombre, cantidad]) => (
@@ -111,57 +119,20 @@ const waConsulta = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consul
     )
   }
 
-  <!-- Quiénes somos y servicios -->
+  <!-- Servicios -->
   <section class="border-t border-slate-200 bg-white">
-    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-2">
-      <div>
-        <h2 class="text-xl font-bold tracking-tight text-slate-900">Quiénes somos</h2>
-        <p class="mt-4 text-sm leading-relaxed text-slate-600">
-          Somos {NEGOCIO.nombre}, un negocio de audio automotor en {NEGOCIO.ciudad}. Te
-          asesoramos para encontrar el equipo ideal para tu vehículo, desde la primera consulta
-          hasta la entrega.
-        </p>
-        <p class="mt-3 text-sm leading-relaxed text-slate-600">
-          Comprá online desde donde estés y coordiná todo por WhatsApp, o acercate al local y te
-          atendemos personalmente.
-        </p>
-        <p class="mt-3 text-sm leading-relaxed text-slate-500">
-          {NEGOCIO.direccion} · {NEGOCIO.horarios}
-        </p>
-      </div>
-
-      <div>
-        <h2 class="text-xl font-bold tracking-tight text-slate-900">Nuestros servicios</h2>
-        <div class="mt-4 grid gap-3 sm:grid-cols-2">
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <span class="text-lg">🎯</span>
-            <h3 class="mt-2 text-sm font-semibold text-slate-800">Asesoramiento</h3>
-            <p class="mt-1 text-xs leading-relaxed text-slate-500">
-              Te ayudamos a elegir el equipo según tu vehículo y tu presupuesto.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <span class="text-lg">📦</span>
-            <h3 class="mt-2 text-sm font-semibold text-slate-800">Envíos</h3>
-            <p class="mt-1 text-xs leading-relaxed text-slate-500">
-              Coordinamos el envío por WhatsApp a donde lo necesites.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <span class="text-lg">🏪</span>
-            <h3 class="mt-2 text-sm font-semibold text-slate-800">Retiro en el local</h3>
-            <p class="mt-1 text-xs leading-relaxed text-slate-500">
-              {NEGOCIO.horarios}
-            </p>
-          </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <span class="text-lg">💬</span>
-            <h3 class="mt-2 text-sm font-semibold text-slate-800">Atención por WhatsApp</h3>
-            <p class="mt-1 text-xs leading-relaxed text-slate-500">
-              Consultas y pedidos al {NEGOCIO.telefono}.
-            </p>
-          </div>
-        </div>
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <h2 class="text-xl font-bold tracking-tight text-slate-900">Nuestros servicios</h2>
+      <p class="mt-1 text-sm text-slate-500">Venta e instalación</p>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          servicios.map(([icono, nombre]) => (
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <span class="text-lg">{icono}</span>
+              <h3 class="mt-2 text-sm font-semibold text-slate-800">{nombre}</h3>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>

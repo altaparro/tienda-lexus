@@ -1,0 +1,6 @@
+Poné acá las fotos del local (formatos: jpg, jpeg, png o webp).
+
+Se muestran de fondo en el hero de la portada, rotando cada 5 segundos,
+en orden alfabético. Ejemplo: local-1.jpg, local-2.jpg, local-3.jpg.
+
+Si no hay fotos en esta carpeta, el hero se muestra con fondo claro.
