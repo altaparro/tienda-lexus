@@ -99,95 +99,58 @@ const servicios = [
     )
   }
 
-  <!-- Quiénes somos y servicios -->
-  <section id="quienes-somos" class="border-t border-neutral-800 bg-neutral-900">
-    <div class="mx-auto max-w-6xl px-4 py-14">
-      <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
+  <!-- Quiénes somos -->
+  <section id="quienes-somos" class="border-t border-neutral-800 bg-neutral-950">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div class="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900">
+          {
+            imagenesHero.length > 0 && (
+              <img
+                src={imagenesHero[0]}
+                alt="Local Lexus"
+                class="aspect-[4/3] h-full w-full object-cover"
+              />
+            )
+          }
+        </div>
         <div>
           <span class="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-400">
             <span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
             Desde 2006
           </span>
-          <h2 class="mt-4 text-2xl font-bold tracking-tight text-neutral-100 sm:text-3xl">
+          <h2 class="mt-4 text-3xl font-bold tracking-tight text-neutral-100 sm:text-4xl">
             Quiénes somos
           </h2>
-          <p class="mt-4 text-sm leading-relaxed text-neutral-400 sm:text-base">{textoHero}</p>
-          <p class="mt-4 text-sm leading-relaxed text-neutral-400 sm:text-base">
+          <p class="mt-5 text-base leading-relaxed text-neutral-300">{textoHero}</p>
+          <p class="mt-4 text-base leading-relaxed text-neutral-400">
             Comprá online desde donde estés y coordiná todo por WhatsApp, o acercate al local y te
             atendemos personalmente.
           </p>
-          <div class="mt-7 flex flex-wrap gap-3">
+          <dl class="mt-8 grid grid-cols-2 gap-4">
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-900 p-5">
+              <dt class="text-xs font-medium uppercase tracking-wide text-neutral-500">Experiencia</dt>
+              <dd class="mt-1 text-2xl font-bold text-neutral-100">+18 años</dd>
+            </div>
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-900 p-5">
+              <dt class="text-xs font-medium uppercase tracking-wide text-neutral-500">Atención</dt>
+              <dd class="mt-1 text-2xl font-bold text-neutral-100">Personalizada</dd>
+            </div>
+          </dl>
+          <div class="mt-8 flex flex-wrap gap-3">
             <a
               href={wa}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-neutral-950 transition hover:bg-emerald-400"
+              class="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-emerald-400"
             >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-              </svg>
               Escribinos por WhatsApp
             </a>
             <a
               href="/catalogo"
-              class="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-2.5 text-sm font-semibold text-neutral-200 transition hover:border-neutral-600 hover:text-neutral-100"
+              class="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-900 px-5 py-3 text-sm font-semibold text-neutral-200 transition hover:border-neutral-600 hover:text-neutral-100"
             >
               Ver productos
-            </a>
-          </div>
-          <dl class="mt-8 grid grid-cols-2 gap-4">
-            <div class="rounded-2xl border border-neutral-800 bg-neutral-800/50 p-4">
-              <dt class="text-xs font-medium uppercase tracking-wide text-neutral-500">Experiencia</dt>
-              <dd class="mt-1 text-lg font-bold text-neutral-100">+18 años</dd>
-            </div>
-            <div class="rounded-2xl border border-neutral-800 bg-neutral-800/50 p-4">
-              <dt class="text-xs font-medium uppercase tracking-wide text-neutral-500">Atención</dt>
-              <dd class="mt-1 text-lg font-bold text-neutral-100">Personalizada</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div>
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            Nuestros servicios
-          </h3>
-          <div class="mt-4 grid gap-3 sm:grid-cols-2">
-            {
-              servicios.map(([icono, nombre]) => (
-                <div class="flex items-center gap-3 rounded-2xl border border-neutral-800 bg-neutral-800/60 p-4 transition hover:border-orange-500/40 hover:bg-neutral-800">
-                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-lg">
-                    {icono}
-                  </span>
-                  <h4 class="text-sm font-semibold text-neutral-200">{nombre}</h4>
-                </div>
-              ))
-            }
-          </div>
-
-          <div class="mt-4 flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-800/60 p-4 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex items-start gap-3">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-500">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                </svg>
-              </span>
-              <div>
-                <p class="text-sm font-semibold text-neutral-200">Visitá el local</p>
-                <p class="text-xs leading-relaxed text-neutral-400">{NEGOCIO.direccion}</p>
-                <p class="mt-1 text-xs text-neutral-500">{NEGOCIO.horarios}</p>
-              </div>
-            </div>
-            <a
-              href={mapsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-neutral-700 px-3 py-2 text-xs font-semibold text-neutral-200 transition hover:border-orange-500/40 hover:text-orange-400"
-            >
-              Cómo llegar
-              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
             </a>
           </div>
         </div>
@@ -195,6 +158,64 @@ const servicios = [
     </div>
   </section>
 
+  <!-- Servicios -->
+  <section class="border-t border-neutral-800 bg-neutral-900">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div class="mb-10 max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight text-neutral-100 sm:text-4xl">Nuestros servicios</h2>
+        <p class="mt-3 text-base text-neutral-400">
+          Instalación y venta de audio, seguridad y electricidad para tu vehículo.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          servicios.map(([icono, nombre]) => (
+            <div class="flex items-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-950 p-5 transition hover:border-orange-500/40">
+              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-xl">
+                {icono}
+              </span>
+              <h3 class="text-sm font-semibold text-neutral-200">{nombre}</h3>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Visitanos -->
+  <section class="border-t border-neutral-800 bg-neutral-950">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-neutral-100 sm:text-4xl">Visitá el local</h2>
+          <p class="mt-4 text-base leading-relaxed text-neutral-400">{NEGOCIO.direccion}</p>
+          <p class="mt-2 text-sm text-neutral-500">{NEGOCIO.horarios}</p>
+          <a
+            href={mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-orange-400"
+          >
+            Cómo llegar
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900">
+          {
+            imagenesHero.length > 1 && (
+              <img
+                src={imagenesHero[1]}
+                alt="Interior del local"
+                class="aspect-[4/3] h-full w-full object-cover"
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Cómo funciona -->
   <section class="border-t border-neutral-700 bg-neutral-800">
     <div class="mx-auto max-w-6xl px-4 py-12">
