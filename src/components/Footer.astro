@@ -7,12 +7,27 @@ const mapsEmbed = `https://www.google.com/maps?q=${direccionQuery}&output=embed`
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(NEGOCIO.direccion)}`
 const telLink = `tel:${NEGOCIO.telefono.replace(/[^+\d]/g, '')}`
 
-const comentarios = [
-  { nombre: 'Cliente verificado', texto: 'Excelente servicio, instalaron todo en tiempo y con muy buena calidad.', estrellas: 5 },
-  { nombre: 'Cliente verificado', texto: 'Muy buena atencion y precios competitivos. Se los recomiendo.', estrellas: 5 },
-  { nombre: 'Cliente verificado', texto: 'Buen servicio, llego rapido y el equipo quedo perfecto.', estrellas: 4 }
-]
-const comentariosValidos = comentarios.filter((c) => c.estrellas >= 4)
+
+const GOOGLE_API_KEY = import.meta.env.GOOGLE_API_KEY
+const GOOGLE_PLACE_ID = import.meta.env.GOOGLE_PLACE_ID
+
+let comentariosValidos = []
+if (GOOGLE_API_KEY && GOOGLE_PLACE_ID) {
+  try {
+    const res = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&key=${GOOGLE_API_KEY}&language=es`)
+    const data = await res.json()
+    const reviews = Array.isArray(data?.result?.reviews) ? data.result.reviews : []
+    comentariosValidos = reviews
+      .filter((r) => Number(r.rating) >= 4)
+      .map((r) => ({
+        nombre: r.author_name || 'Cliente',
+        texto: r.text || '',
+        estrellas: Number(r.rating) || 0
+      }))
+  } catch {
+    comentariosValidos = []
+  }
+}
 ---
 
 <footer class="border-t border-neutral-800 bg-neutral-900">
