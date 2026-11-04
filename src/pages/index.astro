@@ -7,7 +7,6 @@ import { NEGOCIO, linkWhatsApp } from '../lib/negocio'
 const productos = await obtenerProductosPublicos()
 
 const wa = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consulta.`)
-const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(NEGOCIO.direccion)}`
 
 const heroGlob = import.meta.glob('/src/assets/hero/*.{jpg,jpeg,png,webp}', {
   eager: true,
@@ -109,7 +108,7 @@ const servicios = [
               <img
                 src={imagenesHero[0]}
                 alt="Local Lexus"
-                class="aspect-[4/3] h-full w-full object-cover"
+                class="aspect-[4/3] h-full w-full object-contain"
               />
             )
           }
@@ -182,40 +181,6 @@ const servicios = [
     </div>
   </section>
 
-  <!-- Visitanos -->
-  <section class="border-t border-neutral-800 bg-neutral-950">
-    <div class="mx-auto max-w-6xl px-4 py-16">
-      <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight text-neutral-100 sm:text-4xl">Visitá el local</h2>
-          <p class="mt-4 text-base leading-relaxed text-neutral-400">{NEGOCIO.direccion}</p>
-          <p class="mt-2 text-sm text-neutral-500">{NEGOCIO.horarios}</p>
-          <a
-            href={mapsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-6 inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-orange-400"
-          >
-            Cómo llegar
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
-        </div>
-        <div class="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900">
-          {
-            imagenesHero.length > 1 && (
-              <img
-                src={imagenesHero[1]}
-                alt="Interior del local"
-                class="aspect-[4/3] h-full w-full object-cover"
-              />
-            )
-          }
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- Cómo funciona -->
   <section class="border-t border-neutral-700 bg-neutral-800">
     <div class="mx-auto max-w-6xl px-4 py-12">

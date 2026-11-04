@@ -48,7 +48,7 @@ export default function CarritoPage() {
                 <img src={item.imagen} alt={item.nombre} className="h-full w-full object-contain p-2" />
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
-                  <img src="/logo.png" alt="" className="h-10 w-10 object-contain opacity-40" />
+                  <img src="/logo-lexus-transparente.png" alt="" className="h-10 w-10 object-contain opacity-40" />
                 </div>
               )}
             </div>

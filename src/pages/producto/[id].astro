@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import BotonCarrito from '../../components/BotonCarrito'
 import GaleriaProducto from '../../components/GaleriaProducto'
-import TarjetaProducto from '../../components/TarjetaProducto'
+import TarjetasRelacionadas from '../../components/TarjetasRelacionadas'
 import { obtenerProductoPublico, obtenerProductosPublicos } from '../../lib/productos'
 import { fmtPrecio } from '../../lib/format'
 import { NEGOCIO, linkWhatsApp } from '../../lib/negocio'
@@ -163,11 +163,7 @@ const consulta = linkWhatsApp(
           <h2 class="mb-6 text-xl font-bold tracking-tight text-neutral-100">
             Productos relacionados
           </h2>
-          <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {relacionados.map((p) => (
-              <TarjetaProducto producto={p} />
-            ))}
-          </div>
+          <TarjetasRelacionadas client:load productos={relacionados} />
         </section>
       )
     }

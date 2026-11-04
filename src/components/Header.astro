@@ -5,11 +5,8 @@ import { NEGOCIO } from '../lib/negocio'
 
 <header class="sticky top-0 z-40 border-b border-neutral-800 bg-neutral-950/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
-    <a href="/" class="flex shrink-0 items-center gap-2" aria-label={`Ir al inicio de ${NEGOCIO.nombre}`}>
-      <img src="/logo.png" alt={NEGOCIO.nombre} class="h-10 w-10 rounded-lg object-contain" />
-      <span class="hidden text-sm font-bold tracking-tight text-neutral-100 sm:inline sm:text-base">
-        {NEGOCIO.nombre}
-      </span>
+    <a href="/" class="flex shrink-0 items-center" aria-label={`Ir al inicio de ${NEGOCIO.nombre}`}>
+      <img src="/logo-lexus-transparente.png" alt={NEGOCIO.nombre} class="h-10 w-auto object-contain" />
     </a>
 
     <form action="/catalogo" method="get" class="hidden flex-1 justify-center sm:flex">

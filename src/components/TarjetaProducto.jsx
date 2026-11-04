@@ -1,4 +1,5 @@
 import { fmtPrecio } from '../lib/format'
+import { agregar } from '../lib/carrito'
 
 function estadoStock(stock) {
   if (stock <= 0) return { texto: 'Sin stock', clase: 'bg-red-500/10 text-red-400 ring-red-500/20' }
@@ -9,19 +10,23 @@ export default function TarjetaProducto({ producto }) {
   const stock = Number(producto.stock || 0)
   const aviso = estadoStock(stock)
 
+  function sumarAlCarrito() {
+    if (stock <= 0) return
+    agregar(producto, 1)
+  }
+
   return (
-    <a
-      href={`/producto/${producto.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-700 bg-neutral-800 shadow-sm transition hover:-translate-y-1 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-900/20"
-    >
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-700 bg-neutral-800 shadow-sm transition hover:-translate-y-1 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-900/20">
       <div className="relative aspect-square overflow-hidden bg-white">
         {producto.imagen ? (
-          <img
-            src={producto.imagen}
-            alt={producto.nombre}
-            loading="lazy"
-            className="h-full w-full object-contain p-4 transition group-hover:scale-105"
-          />
+          <a href={`/producto/${producto.id}`} className="absolute inset-0 z-0" aria-label={`Ver ${producto.nombre}`}>
+            <img
+              src={producto.imagen}
+              alt={producto.nombre}
+              loading="lazy"
+              className="h-full w-full object-contain p-4 transition group-hover:scale-105"
+            />
+          </a>
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-neutral-700">
             <svg
@@ -41,11 +46,22 @@ export default function TarjetaProducto({ producto }) {
         )}
         {aviso && (
           <span
-            className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${aviso.clase}`}
+            className={`absolute left-3 top-3 z-10 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${aviso.clase}`}
           >
             {aviso.texto}
           </span>
         )}
+        <button
+          type="button"
+          onClick={sumarAlCarrito}
+          disabled={stock <= 0}
+          aria-label={`Agregar ${producto.nombre} al carrito`}
+          className="absolute bottom-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-orange-600 text-white shadow-lg shadow-orange-900/40 transition hover:bg-orange-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-900 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3.75L11.25 12 4.5 18.75H2.25m11.25-6.5v6m3-6v6h2.25a1.5 1.5 0 0 0 1.5-1.5v-4.5a1.5 1.5 0 0 0-1.5-1.5H15M12 12v6" />
+          </svg>
+        </button>
       </div>
 
       <div className="flex flex-1 flex-col p-4">
@@ -66,6 +82,6 @@ export default function TarjetaProducto({ producto }) {
           {fmtPrecio.format(producto.precio_venta)}
         </p>
       </div>
-    </a>
+    </div>
   )
 }
