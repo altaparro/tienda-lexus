@@ -34,12 +34,12 @@ const textoHero =
   'Somos una empresa familiar desde 2006. Nos dedicamos a la venta e instalación de estéreos multimedias, parlantes, alarmas, cierres centralizados, iluminación, Cree LEDs y electricidad en general.'
 
 const servicios = [
-  ['🔊', 'Estéreos multimedias'],
-  ['🎤', 'Parlantes'],
-  ['🚨', 'Alarmas'],
-  ['🔑', 'Cierres centralizados'],
-  ['💡', 'Iluminación y Cree LEDs'],
-  ['⚡', 'Electricidad en general']
+  { id: 'estereos', nombre: 'Estéreos multimedias' },
+  { id: 'parlantes', nombre: 'Parlantes' },
+  { id: 'alarmas', nombre: 'Alarmas' },
+  { id: 'cierres', nombre: 'Cierres centralizados' },
+  { id: 'iluminacion', nombre: 'Iluminación y Cree LEDs' },
+  { id: 'electricidad', nombre: 'Electricidad en general' }
 ]
 ---
 
@@ -168,12 +168,43 @@ const servicios = [
       </div>
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
-          servicios.map(([icono, nombre]) => (
+          servicios.map((s) => (
             <div class="flex items-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-950 p-5 transition hover:border-orange-500/40">
-              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-xl">
-                {icono}
+              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-500">
+                {s.id === 'estereos' && (
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 9.5v5h3.5l3.5 3.5v-7L11.5 9.5H8z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.5 8.5v7" />
+                  </svg>
+                )}
+                {s.id === 'parlantes' && (
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.5 12a11.5 11.5 0 0 0 0-5 11.5 11.5 0 0 0 0 15 11.5 11.5 0 0 0 0-5" />
+                  </svg>
+                )}
+                {s.id === 'alarmas' && (
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3 4.5 5.5v6c0 4.5 2.8 8.4 7.5 10 4.7-1.6 7.5-5.5 7.5-10v-6L12 3Z" />
+                  </svg>
+                )}
+                {s.id === 'cierres' && (
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+                    <circle cx="8" cy="15" r="5" />
+                    <path strokeLinecap="round" d="M11.5 11.5 21 2" />
+                  </svg>
+                )}
+                {s.id === 'iluminacion' && (
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 21h6M12 3a6 6 0 0 0-6 6c0 2.5 1.5 4.5 3 6h6c1.5-1.5 3-3.5 3-6a6 6 0 0 0-6-6Z" />
+                  </svg>
+                )}
+                {s.id === 'electricidad' && (
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 2 3.5 14.5H11L10 22l9.5-12.5H12L13 2Z" />
+                  </svg>
+                )}
               </span>
-              <h3 class="text-sm font-semibold text-neutral-200">{nombre}</h3>
+              <h3 class="text-sm font-semibold text-neutral-200">{s.nombre}</h3>
             </div>
           ))
         }
