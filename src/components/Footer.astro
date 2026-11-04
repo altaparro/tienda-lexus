@@ -4,7 +4,7 @@ import { NEGOCIO, linkWhatsApp } from '../lib/negocio'
 const wa = linkWhatsApp(`Hola ${NEGOCIO.nombre}, quiero hacer una consulta.`)
 const direccionQuery = encodeURIComponent(NEGOCIO.direccion)
 const mapsEmbed = `https://www.google.com/maps?q=${direccionQuery}&output=embed`
-const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(NEGOCIO.direccion)}`
+const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(NEGOCIO.nombre)}`
 const telLink = `tel:${NEGOCIO.telefono.replace(/[^+\d]/g, '')}`
 ---
 
