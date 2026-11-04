@@ -6,28 +6,6 @@ const direccionQuery = encodeURIComponent(NEGOCIO.direccion)
 const mapsEmbed = `https://www.google.com/maps?q=${direccionQuery}&output=embed`
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(NEGOCIO.direccion)}`
 const telLink = `tel:${NEGOCIO.telefono.replace(/[^+\d]/g, '')}`
-
-
-const GOOGLE_API_KEY = import.meta.env.GOOGLE_API_KEY
-const GOOGLE_PLACE_ID = import.meta.env.GOOGLE_PLACE_ID
-
-let comentariosValidos = []
-if (GOOGLE_API_KEY && GOOGLE_PLACE_ID) {
-  try {
-    const res = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${GOOGLE_PLACE_ID}&key=${GOOGLE_API_KEY}&language=es`)
-    const data = await res.json()
-    const reviews = Array.isArray(data?.result?.reviews) ? data.result.reviews : []
-    comentariosValidos = reviews
-      .filter((r) => Number(r.rating) >= 4)
-      .map((r) => ({
-        nombre: r.author_name || 'Cliente',
-        texto: r.text || '',
-        estrellas: Number(r.rating) || 0
-      }))
-  } catch {
-    comentariosValidos = []
-  }
-}
 ---
 
 <footer class="border-t border-neutral-800 bg-neutral-900">
@@ -83,43 +61,27 @@ if (GOOGLE_API_KEY && GOOGLE_PLACE_ID) {
       </div>
 
       <div class="lg:col-span-5">
-        <div class="grid gap-4 lg:grid-cols-2">
-          <div class="relative min-h-[260px] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-800">
-            <iframe
-              src={mapsEmbed}
-              title={`Ubicaci\u00f3n de ${NEGOCIO.nombre}`}
-              class="absolute inset-0 h-full w-full"
-              style="border:0"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-            <a
-              href={mapsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-lg bg-neutral-950/90 px-3 py-2 text-xs font-semibold text-neutral-100 shadow-lg backdrop-blur transition hover:bg-neutral-950"
-            >
-              <svg class="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-              C\u00f3mo llegar
-            </a>
-          </div>
-          <div class="rounded-2xl border border-neutral-800 bg-neutral-800 p-5">
-            <h3 class="text-sm font-semibold text-neutral-100">Opiniones</h3>
-            <div class="mt-3 space-y-3">
-              {comentariosValidos.map((c) => (
-                <div class="rounded-xl border border-neutral-700 bg-neutral-900 p-4">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="text-sm font-semibold text-neutral-100">{c.nombre}</span>
-                    <span class="text-sm font-semibold text-orange-500">{c.estrellas} estrellas</span>
-                  </div>
-                  <p class="mt-2 text-sm leading-relaxed text-neutral-400">{c.texto}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div class="relative min-h-[260px] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-800">
+          <iframe
+            src={mapsEmbed}
+            title={`Ubicaci\u00f3n de ${NEGOCIO.nombre}`}
+            class="absolute inset-0 h-full w-full"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+          <a
+            href={mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-lg bg-neutral-950/90 px-3 py-2 text-xs font-semibold text-neutral-100 shadow-lg backdrop-blur transition hover:bg-neutral-950"
+          >
+            <svg class="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+            C\u00f3mo llegar
+          </a>
         </div>
       </div>
     </div>
