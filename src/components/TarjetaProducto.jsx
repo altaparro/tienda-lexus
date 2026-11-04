@@ -67,7 +67,7 @@ export default function TarjetaProducto({ producto }) {
             {producto.descripcion}
           </p>
         )}
-        <div className="mt-auto flex items-center justify-between gap-3 pt-3">
+        <div className="mt-auto flex flex-col gap-3">
           <p className="text-lg font-bold tabular-nums text-neutral-100">
             {fmtPrecio.format(producto.precio_venta)}
           </p>
@@ -76,9 +76,9 @@ export default function TarjetaProducto({ producto }) {
             onClick={sumarAlCarrito}
             disabled={stock <= 0}
             aria-label={`Agregar ${producto.nombre} al carrito`}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white shadow-lg shadow-orange-900/40 transition hover:bg-orange-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-900 disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex h-11 w-11 items-center justify-center self-end rounded-full bg-orange-600 text-white shadow-lg shadow-orange-900/40 transition hover:bg-orange-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-900 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3.75L11.25 12 4.5 18.75H2.25m11.25-6.5v6m3-6v6h2.25a1.5 1.5 0 0 0 1.5-1.5v-4.5a1.5 1.5 0 0 0-1.5-1.5H15M12 12v6" />
             </svg>
           </button>
