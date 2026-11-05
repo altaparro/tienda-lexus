@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react'
+import { NEGOCIO } from '../lib/negocio'
 
 export default function Hero({ imagenes, whatsapp }) {
   const [activa, setActiva] = useState(0)
+  const [pausado, setPausado] = useState(false)
 
   useEffect(() => {
-    if (imagenes.length < 2) return
+    if (imagenes.length < 2 || pausado) return
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
     const t = setInterval(() => setActiva((a) => (a + 1) % imagenes.length), 5000)
     return () => clearInterval(t)
-  }, [imagenes.length])
+  }, [imagenes.length, pausado])
 
   if (!imagenes.length) return null
 
@@ -18,13 +23,37 @@ export default function Hero({ imagenes, whatsapp }) {
           <img
             key={src}
             src={src}
-            alt=""
+            alt={`${NEGOCIO.nombre}: foto ${i + 1} del local`}
             aria-hidden={i !== activa}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchPriority={i === 0 ? 'high' : 'auto'}
+            decoding="async"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
               i === activa ? 'opacity-100' : 'opacity-0'
             }`}
           />
         ))}
+
+        {imagenes.length > 1 && (
+          <button
+            type="button"
+            onClick={() => setPausado((p) => !p)}
+            aria-label={pausado ? 'Reanudar presentación de fotos' : 'Pausar presentación de fotos'}
+            aria-pressed={pausado}
+            className="absolute bottom-6 left-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-950/60 text-neutral-100 backdrop-blur transition hover:bg-neutral-950/80 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          >
+            {pausado ? (
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 0 1 0 1.971l-11.54 6.347a1.125 1.125 0 0 1-1.667-.985V5.653Z" />
+              </svg>
+            ) : (
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 4.5A1.5 1.5 0 0 1 8.5 3h1A1.5 1.5 0 0 1 11 4.5v15A1.5 1.5 0 0 1 9.5 21h-1A1.5 1.5 0 0 1 7 19.5v-15Zm6 0A1.5 1.5 0 0 1 14.5 3h1A1.5 1.5 0 0 1 17 4.5v15A1.5 1.5 0 0 1 15.5 21h-1A1.5 1.5 0 0 1 13 19.5v-15Z" />
+              </svg>
+            )}
+          </button>
+        )}
+
         {whatsapp && (
           <a
             href={whatsapp}

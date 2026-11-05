@@ -11,6 +11,7 @@ export default function GaleriaProducto({ imagenes, nombre }) {
         <img
           src={imagenes[activo]}
           alt={nombre}
+          decoding="async"
           className="h-full w-full object-contain p-8"
         />
       </div>
@@ -28,7 +29,7 @@ export default function GaleriaProducto({ imagenes, nombre }) {
                   : 'border-transparent hover:border-neutral-600'
               }`}
             >
-              <img src={src} alt="" className="h-full w-full object-cover" />
+              <img src={src} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </button>
           ))}
         </div>

@@ -55,12 +55,14 @@ export default function TarjetaProducto({ producto }) {
 
       <div className="flex flex-1 flex-col p-4">
         {producto.marca && (
-          <span className="text-xs font-semibold uppercase tracking-wide text-orange-600">
+          <span className="text-xs font-semibold uppercase tracking-wide text-orange-400">
             {producto.marca}
           </span>
         )}
         <h3 className="mt-1 line-clamp-2 flex-1 text-sm font-semibold text-neutral-200 group-hover:text-neutral-50">
-          {producto.nombre}
+          <a href={`/producto/${producto.id}`} className="transition hover:text-orange-400">
+            {producto.nombre}
+          </a>
         </h3>
         {producto.descripcion && (
           <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-400">
@@ -78,8 +80,8 @@ export default function TarjetaProducto({ producto }) {
             aria-label={`Agregar ${producto.nombre} al carrito`}
             className="flex h-12 w-12 items-center justify-center self-end rounded-full bg-orange-600 text-white shadow-xl shadow-orange-900/50 transition hover:bg-orange-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-900 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3.75L11.25 12 4.5 18.75H2.25m11.25-6.5v6m3-6v6h2.25a1.5 1.5 0 0 0 1.5-1.5v-4.5a1.5 1.5 0 0 0-1.5-1.5H15M12 12v6" />
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
             </svg>
           </button>
         </div>

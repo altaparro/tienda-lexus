@@ -14,7 +14,7 @@ export default function CarritoPage() {
     return (
       <div className="space-y-3" aria-hidden="true">
         {Array.from({ length: 2 }).map((_, i) => (
-          <div key={i} className="h-24 animate-pulse rounded-2xl bg-neutral-200" />
+          <div key={i} className="h-24 animate-pulse rounded-2xl bg-neutral-800" />
         ))}
       </div>
     )
@@ -57,13 +57,13 @@ export default function CarritoPage() {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   {item.marca && (
-                    <p className="text-xs font-semibold uppercase tracking-wide text-orange-600">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-orange-400">
                       {item.marca}
                     </p>
                   )}
                   <a
                     href={`/producto/${item.producto_id}`}
-                    className="truncate text-sm font-semibold text-neutral-200 hover:text-orange-700"
+                    className="truncate text-sm font-semibold text-neutral-200 transition hover:text-orange-400"
                   >
                     {item.nombre}
                   </a>
@@ -109,7 +109,7 @@ export default function CarritoPage() {
               </div>
 
               {item.cantidad >= item.stock && (
-                <p className="mt-2 text-xs text-amber-600">Stock máximo: {item.stock} unidades</p>
+                <p className="mt-2 text-xs text-amber-400">Stock máximo: {item.stock} unidades</p>
               )}
             </div>
           </div>

@@ -83,8 +83,8 @@ export default function Checkout() {
   if (!montado) {
     return (
       <div className="grid gap-6 lg:grid-cols-[1fr_320px]" aria-hidden="true">
-        <div className="h-96 animate-pulse rounded-2xl bg-neutral-200" />
-        <div className="h-64 animate-pulse rounded-2xl bg-neutral-200" />
+        <div className="h-96 animate-pulse rounded-2xl bg-neutral-800" />
+        <div className="h-64 animate-pulse rounded-2xl bg-neutral-800" />
       </div>
     )
   }
@@ -112,7 +112,7 @@ export default function Checkout() {
         </p>
 
         {error && (
-          <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
             {error}
           </div>
         )}
@@ -236,8 +236,10 @@ function Confirmacion({ pedido }) {
 
   return (
     <div className="mx-auto max-w-lg rounded-2xl border border-neutral-700 bg-neutral-800 p-8 text-center shadow-sm">
-      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl text-emerald-600">
-        ✓
+      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
+        <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        </svg>
       </div>
       <h1 className="mt-4 text-xl font-bold text-neutral-100">¡Pedido recibido!</h1>
       <p className="mt-2 text-sm text-neutral-400">
